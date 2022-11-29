@@ -6,4 +6,4 @@ from .models import MainModel
 class MainSerializer(ModelSerializer):
     class Meta:
         model = MainModel
-        fields = ('id', 'base', 'short')
+        fields = ('id', 'base')

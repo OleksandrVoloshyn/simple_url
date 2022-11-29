@@ -6,5 +6,4 @@ class MainModel(models.Model):
         db_table = 'main'
 
     base = models.TextField()
-    short = models.TextField()
     clicks = models.PositiveIntegerField(default=0)

@@ -4,15 +4,13 @@ from main.models import MainModel
 
 
 def get_or_create_short_url(url, front):
-    last_url = MainModel.objects.all().last()
-    last_id = last_url.id if last_url else 0
-    hexed_id = hex(last_id + 1)[2:]
-    obj, _ = MainModel.objects.get_or_create(base=url, defaults={'short': hexed_id})
-    return os.path.join(front, obj.short)
+    obj, _ = MainModel.objects.get_or_create(base=url)
+    hex_id = hex(obj.id)[2:]
+    return os.path.join(front, hex_id)
 
 
 def get_url_for_redirect(hexadecimal):
-    data = MainModel.objects.filter(short=hexadecimal).first()
+    data = MainModel.objects.filter(id=int(hexadecimal, 16)).first()
     if data:
         data.clicks += 1
         data.save()
